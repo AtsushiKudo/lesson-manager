@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="sampleApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <script type="text/javascript" src="multipleDatePicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="multiple-date-picker.css">
+</head>
+<body>
+  <script>
+  angular.module('sampleApp', ['multipleDatePicker']);
+  </script>
+  <multiple-date-picker ng-model="selectedDate"></multiple-date-picker>
+  <textarea>{{ selectedDate.join() }}</textarea>
+</body>
+</html>
