@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.LessonManagement.util.Role;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
