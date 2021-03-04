@@ -13,10 +13,10 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content">
 				<div class="container-fluid">
-					<h6 class="m-0 font-weight-bold text-primary">
-               受講管理システム
-              </h6>
-
+					<h6 class="m-0 font-weight-bold text-primary">受講管理システム</h6>
+					<div class="alert alert-success" th:if="${param.lesson-register}">
+						<small>ユーザを新規登録しました</small>
+					</div>
 
 				</div>
 			</div>

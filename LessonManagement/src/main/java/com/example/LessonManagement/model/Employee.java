@@ -34,6 +34,6 @@ public class Employee {
 //    private int gender;
     private boolean admin;
     private String role;
-    private int deleteFlag;
+    private int deleteFlag = 0;
 
 }
