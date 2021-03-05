@@ -15,7 +15,10 @@
 				<div class="container-fluid">
 
 					<div class="alert alert-success" th:if="${param.lesson_register}">
-						<small>講座マスタを新規登録しました</small>
+						<small>講座マスタの登録（編集）が完了しました。</small>
+					</div>
+					<div class="alert alert-success" th:if="${param.lesson_delete}">
+						<small>講座マスタの削除が完了しました。</small>
 					</div>
 					<!-- List -->
 					<!-- <div class="card shadow my-4">

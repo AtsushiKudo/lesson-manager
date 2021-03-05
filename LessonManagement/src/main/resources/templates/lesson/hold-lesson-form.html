@@ -1,16 +1,51 @@
 <!DOCTYPE html>
-<html lang="ja" ng-app="sampleApp">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-  <script type="text/javascript" src="multipleDatePicker.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="multiple-date-picker.css">
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
 </head>
-<body>
-  <script>
-  angular.module('sampleApp', ['multipleDatePicker']);
-  </script>
-  <multiple-date-picker ng-model="selectedDate"></multiple-date-picker>
-  <textarea>{{ selectedDate.join() }}</textarea>
+<body id="page-top">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).on("click", ".add", function() {
+    $(this).parent().clone(true).insertAfter($(this).parent());
+});
+$(document).on("click", ".del", function() {
+    var target = $(this).parent();
+    if (target.parent().children().length > 1) {
+        target.remove();
+    }
+});
+</script>
+
+
+	<!-- Page Wrapper -->
+
+  <div id="wrapper">
+    <th:block th:insert="fragments/sidebar :: sidebar"></th:block>
+
+    <!-- Main -->
+	<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content">
+			<div class="container-fluid">
+
+				<div id="input_pluralBox">
+					<div id="input_plural">
+						<input type="text" class="form-control"
+							placeholder="サンプルテキストサンプルテキストサンプルテキスト"> <input
+							type="button" value="＋" class="add pluralBtn"> <input
+							type="button" value="－" class="del pluralBtn">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Main -->
+	</div>
+
+
+
+	<th:block th:insert="fragments/base :: scripts"></th:block>
 </body>
 </html>
