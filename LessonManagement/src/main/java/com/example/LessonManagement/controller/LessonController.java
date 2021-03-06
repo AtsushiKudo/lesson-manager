@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.LessonManagement.model.HoldLessonDate;
 import com.example.LessonManagement.model.Lesson;
+import com.example.LessonManagement.repository.HoldLessonDateRepository;
+import com.example.LessonManagement.repository.HoldLessonRepository;
 import com.example.LessonManagement.repository.LessonRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class LessonController {
 
 	private final LessonRepository lessonRepository;
+	private final HoldLessonRepository holdLessonRepository;
+	private final HoldLessonDateRepository holdLessonDateRepository;
 
 	@GetMapping("/admin/lesson/add")
     public String addLesson(@ModelAttribute  Lesson lesson) {
@@ -57,9 +62,16 @@ public class LessonController {
     }
 
     @GetMapping("/admin/hold-lesson/add/{id}")
-    public String addHoldLesson(@PathVariable Long id, Model model) {
 
-        return "/lesson/hold-lesson-form";
+    public String addHoldLesson(@PathVariable Long id, @ModelAttribute  HoldLessonDate holdLessonDarte, Model model) {
+    	model.addAttribute("lesson", lessonRepository.findById(id));
+        return "lesson/lesson-form";
+    }
+
+    @PostMapping("/admin/hold-lesson/add/{id}")
+    public String postAddHoldLesson(@PathVariable Long id, Model model) {
+
+    	return "redirect:/?hold_lesson_register";
     }
 
 }

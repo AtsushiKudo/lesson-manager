@@ -5,9 +5,9 @@
 <th:block th:insert="fragments/base :: header"></th:block>
 </head>
 <body id="page-top">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
 $(document).on("click", ".add", function() {
     $(this).parent().clone(true).insertAfter($(this).parent());
 });
@@ -18,33 +18,60 @@ $(document).on("click", ".del", function() {
     }
 });
 </script>
-
-
 	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<th:block th:insert="fragments/sidebar :: sidebar"></th:block>
 
-  <div id="wrapper">
-    <th:block th:insert="fragments/sidebar :: sidebar"></th:block>
+		<!-- Main -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<div class="container-fluid">
 
-    <!-- Main -->
-	<div id="content-wrapper" class="d-flex flex-column">
-		<div id="content">
-			<div class="container-fluid">
+					<!-- DataTales -->
+					<div class="card shadow my-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">開催講座登録</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<form th:action="@{/admin/lesson/add}"
+									th:object="${holdLessonDateRepository}" method="post">
+									<input type="hidden" th:field="*{id}">
 
-				<div id="input_pluralBox">
-					<div id="input_plural">
-						<input type="text" class="form-control"
-							placeholder="サンプルテキストサンプルテキストサンプルテキスト"> <input
-							type="button" value="＋" class="add pluralBtn"> <input
-							type="button" value="－" class="del pluralBtn">
+									<p th:text=${lesson.date}></p>
+
+									<div class="form-group">
+										<label for="name">講座名</label> <input type="text"
+											class="form-control" th:errorclass="is-invalid"
+											th:field="*{name}">
+										<div class="invalid-feedback" th:errors="*{name}"></div>
+									</div>
+
+									<div id="input_pluralBox">
+										<div id="input_plural">
+											<input type="text" class="form-control"
+												placeholder="サンプルテキストサンプルテキストサンプルテキスト"> <input
+												type="button" value="＋" class="add pluralBtn"> <input
+												type="button" value="－" class="del pluralBtn">
+										</div>
+									</div>
+
+									<!-- Divider -->
+									<hr class="sidebar-divider my-4">
+
+									<button class="btn btn-primary btn-block col-md-4">
+										<i class="fas fa-edit fa-fw"></i> <span class="text">保存</span>
+									</button>
+								</form>
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
+		<!-- End of Main -->
 	</div>
-	<!-- End of Main -->
-	</div>
-
-
 
 	<th:block th:insert="fragments/base :: scripts"></th:block>
 </body>

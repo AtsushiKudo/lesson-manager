@@ -1,4 +1,4 @@
-package validator;
+package com.example.LessonManagement.validator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -5,9 +5,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.example.LessonManagement.validator.UniqueLogin;
+
 import lombok.Getter;
 import lombok.Setter;
-import validator.UniqueLogin;
 
 @Getter
 @Setter

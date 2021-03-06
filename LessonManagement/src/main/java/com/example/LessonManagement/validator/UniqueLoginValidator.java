@@ -1,4 +1,4 @@
-package validator;
+package com.example.LessonManagement.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
