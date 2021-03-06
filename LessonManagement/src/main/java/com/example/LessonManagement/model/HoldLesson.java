@@ -2,9 +2,9 @@ package com.example.LessonManagement.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -18,20 +18,21 @@ import lombok.Setter;
 
 @Data
 @Entity
-
+@Getter
+@Setter
 public class HoldLesson {
 
+	@Getter
+	@Setter
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class PK implements Serializable{
 	    private Long lessonId;
+	    @Column(name="hold_times")
 	    private Long holdTimes;
-
-
 	}
 
-	@Id
 	@EmbeddedId
 	@Getter
 	@Setter
@@ -43,6 +44,7 @@ public class HoldLesson {
     @Getter
 	@Setter
     private Lesson lesson;
+
 
     public HoldLesson(@NonNull final Lesson lesson,
     		@NonNull final Long holdTimes) {
