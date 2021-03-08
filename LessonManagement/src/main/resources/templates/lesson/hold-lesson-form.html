@@ -36,9 +36,13 @@ $(document).on("click", ".del", function() {
 							<div class="table-responsive">
 								<form th:action="@{/admin/hold-lesson/add/{id}(id=*{id})}"
 									th:object="${holdLessonDate}" method="post">
+>
 									<input type="hidden" th:field="*{id}">
+									<input type="hidden" name="hold-times" th:value="${holdTimes}">
 
 
+
+									<p th:text=${holdTimes}></p>
 
 									<div class="form-group">
 										<label>講座名</label>
@@ -49,10 +53,10 @@ $(document).on("click", ".del", function() {
 
 									<div id="input_pluralBox">
 										<div id="input_plural">
-											<input type="text" class="form-control"
-												placeholder="YYYY/MM/DD"> <input
-												type="button" value="＋" class="add pluralBtn"> <input
-												type="button" value="－" class="del pluralBtn">
+											<input type="text" name="hold-lesson-dates"
+												class="form-control" placeholder="yyyy-mm-dd">
+											<input type="button" value="＋" class="add pluralBtn">
+											<input type="button" value="－" class="del pluralBtn">
 										</div>
 									</div>
 
@@ -60,7 +64,7 @@ $(document).on("click", ".del", function() {
 									<hr class="sidebar-divider my-4">
 
 									<button class="btn btn-primary btn-block col-md-4">
-										<i class="fas fa-edit fa-fw"></i> <span class="text">保存</span>
+										<i class="fas fa-edit fa-fw"></i> <span class="text">登録</span>
 									</button>
 								</form>
 							</div>
