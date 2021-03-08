@@ -26,52 +26,57 @@ public class LessonController {
 	private final HoldLessonDateRepository holdLessonDateRepository;
 
 	@GetMapping("/admin/lesson/add")
-    public String addLesson(@ModelAttribute  Lesson lesson) {
-        return "lesson/lesson-form";
-    }
+	public String addLesson(@ModelAttribute  Lesson lesson) {
+		return "lesson/lesson-form";
+	}
 
-    @PostMapping("/admin/lesson/add")
-    public String postAddLesson(@Validated @ModelAttribute Lesson lesson,
-            BindingResult result) {
+	@PostMapping("/admin/lesson/add")
+	public String postAddLesson(@Validated @ModelAttribute Lesson lesson,
+			BindingResult result) {
 
-        if (result.hasErrors()) {
-            return "lesson/lesson-form.html";
-        }
-        lessonRepository.save(lesson);
-        return "redirect:/?lesson_register";
-    }
+		if (result.hasErrors()) {
+			return "lesson/lesson-form.html";
+		}
+		lessonRepository.save(lesson);
+		return "redirect:/?lesson_register";
+	}
 
 
 
-    @GetMapping("/admin/lesson/index")
-    public String showList(Model model) {
-        model.addAttribute("lessons", lessonRepository.findAll());
-        return "lesson/lesson-index";
-    }
+	@GetMapping("/admin/lesson/index")
+	public String showList(Model model) {
+		model.addAttribute("lessons", lessonRepository.findAll());
+		return "lesson/lesson-index";
+	}
 
-    @GetMapping("/admin/lesson/edit/{id}")
-    public String editLesson(@PathVariable Long id, Model model) {
-        model.addAttribute("lesson", lessonRepository.findById(id));
-        return "/lesson/lesson-form";
-    }
+	@GetMapping("/admin/lesson/edit/{id}")
+	public String editLesson(@PathVariable Long id, Model model) {
+		model.addAttribute("lesson", lessonRepository.findById(id));
+		return "/lesson/lesson-form";
+	}
 
-    @GetMapping("/admin/lesson/delete/{id}")
-    public String deleteLesson(@PathVariable Long id) {
-        lessonRepository.deleteById(id);
-        return "redirect:/?lesson_delete";
-    }
+	@GetMapping("/admin/lesson/delete/{id}")
+	public String deleteLesson(@PathVariable Long id) {
+		lessonRepository.deleteById(id);
+		return "redirect:/?lesson_delete";
+	}
 
-    @GetMapping("/admin/hold-lesson/add/{id}")
+	@GetMapping("/admin/hold-lesson/add/{id}")
+	public String addHoldLesson(@PathVariable Long id, @ModelAttribute  HoldLessonDate holdLessonDate, Model model) {
 
-    public String addHoldLesson(@PathVariable Long id, @ModelAttribute  HoldLessonDate holdLessonDarte, Model model) {
-    	model.addAttribute("lesson", lessonRepository.findById(id));
-        return "lesson/lesson-form";
-    }
+		try {
+			model.addAttribute("lesson", lessonRepository.findById(id).get());
+		}catch(Exception e){
+			return "redirect:/admin/lesson/index";
+		}
 
-    @PostMapping("/admin/hold-lesson/add/{id}")
-    public String postAddHoldLesson(@PathVariable Long id, Model model) {
+		return "lesson/hold-lesson-form";
+	}
 
-    	return "redirect:/?hold_lesson_register";
-    }
+	@PostMapping("/admin/hold-lesson/add/{id}")
+	public String postAddHoldLesson(@PathVariable Long id, Model model) {
+
+		return "redirect:/?hold_lesson_register";
+	}
 
 }

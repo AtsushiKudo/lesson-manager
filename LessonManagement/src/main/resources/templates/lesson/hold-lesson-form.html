@@ -34,23 +34,23 @@ $(document).on("click", ".del", function() {
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<form th:action="@{/admin/lesson/add}"
-									th:object="${holdLessonDateRepository}" method="post">
+								<form th:action="@{/admin/hold-lesson/add/{id}(id=*{id})}"
+									th:object="${holdLessonDate}" method="post">
 									<input type="hidden" th:field="*{id}">
 
-									<p th:text=${lesson.date}></p>
+
 
 									<div class="form-group">
-										<label for="name">講座名</label> <input type="text"
-											class="form-control" th:errorclass="is-invalid"
-											th:field="*{name}">
-										<div class="invalid-feedback" th:errors="*{name}"></div>
+										<label>講座名</label>
+										<p th:text=${lesson.name}></p>
 									</div>
+
+
 
 									<div id="input_pluralBox">
 										<div id="input_plural">
 											<input type="text" class="form-control"
-												placeholder="サンプルテキストサンプルテキストサンプルテキスト"> <input
+												placeholder="YYYY/MM/DD"> <input
 												type="button" value="＋" class="add pluralBtn"> <input
 												type="button" value="－" class="del pluralBtn">
 										</div>
