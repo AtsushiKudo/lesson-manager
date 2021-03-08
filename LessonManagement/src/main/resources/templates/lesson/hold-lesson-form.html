@@ -8,16 +8,16 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-$(document).on("click", ".add", function() {
-    $(this).parent().clone(true).insertAfter($(this).parent());
-});
-$(document).on("click", ".del", function() {
-    var target = $(this).parent();
-    if (target.parent().children().length > 1) {
-        target.remove();
-    }
-});
-</script>
+		$(document).on("click", ".add", function() {
+			$(this).parent().clone(true).insertAfter($(this).parent());
+		});
+		$(document).on("click", ".del", function() {
+			var target = $(this).parent();
+			if (target.parent().children().length > 1) {
+				target.remove();
+			}
+		});
+	</script>
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 		<th:block th:insert="fragments/sidebar :: sidebar"></th:block>
@@ -26,6 +26,8 @@ $(document).on("click", ".del", function() {
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content">
 				<div class="container-fluid">
+
+
 
 					<!-- DataTales -->
 					<div class="card shadow my-4">
@@ -36,11 +38,8 @@ $(document).on("click", ".del", function() {
 							<div class="table-responsive">
 								<form th:action="@{/admin/hold-lesson/add/{id}(id=*{id})}"
 									th:object="${holdLessonDate}" method="post">
->
-									<input type="hidden" th:field="*{id}">
-									<input type="hidden" name="hold-times" th:value="${holdTimes}">
-
-
+									> <input type="hidden" th:field="*{id}"> <input
+										type="hidden" name="hold-times" th:value="${holdTimes}">
 
 									<p th:text=${holdTimes}></p>
 
@@ -49,14 +48,16 @@ $(document).on("click", ".del", function() {
 										<p th:text=${lesson.name}></p>
 									</div>
 
-
-
+									<div class="alert-danger" th:if="${param.error}">
+										<small>正しい形式で入力してください</small>
+									</div>
+									<p>日付を入力してください(例 20201202)</p>
 									<div id="input_pluralBox">
 										<div id="input_plural">
 											<input type="text" name="hold-lesson-dates"
-												class="form-control" placeholder="yyyy-mm-dd">
-											<input type="button" value="＋" class="add pluralBtn">
-											<input type="button" value="－" class="del pluralBtn">
+												class="form-control" placeholder="yyyymmdd"> <input
+												type="button" value="＋" class="add pluralBtn"> <input
+												type="button" value="－" class="del pluralBtn">
 										</div>
 									</div>
 

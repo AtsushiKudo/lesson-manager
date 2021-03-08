@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<th:block th:insert="fragments/sidebar :: sidebar"></th:block>
+
+		<!-- Main -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<div class="container-fluid">
+
+
+					<!-- DataTables -->
+					<div class="card shadow my-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">開講予定講座一覧</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+
+								<div th:if="${holdLessons.size() == 0}">該当データがありません</div>
+
+								<table class="table table-bordered"
+									th:if="${holdLessons.size() > 0}">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>名前</th>
+
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="holdLesson : ${holdLessons}" th:object="${holdLesson}">
+											<td th:text="*{pk.lessonId}"></td>
+											<td th:text="*{pk.holdTimes}"></td>
+
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End of Main -->
+	</div>
+
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>

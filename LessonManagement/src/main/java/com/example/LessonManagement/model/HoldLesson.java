@@ -9,15 +9,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
-
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.MapsId;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -64,7 +61,13 @@ public class HoldLesson {
     private List<HoldLessonDate> holdLessonDates;
 
     public HoldLesson(@NonNull final Lesson lesson,
-    		@NonNull final Long holdTimes, final List<HoldLessonDate> holdLessonDates) {
+    		@NonNull final Long holdTimes) {
+    	this.pk = new PK(lesson.getId(), holdTimes);
+    	this.lesson = lesson;
+    }
+
+    public HoldLesson(@NonNull final Lesson lesson,
+    		@NonNull final Long holdTimes, @NonNull List<HoldLessonDate> holdLessonDates) {
     	this.pk = new PK(lesson.getId(), holdTimes);
     	this.lesson = lesson;
     	this.holdLessonDates = holdLessonDates;

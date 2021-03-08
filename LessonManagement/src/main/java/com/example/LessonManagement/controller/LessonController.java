@@ -1,12 +1,13 @@
 package com.example.LessonManagement.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.format.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.*;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import com.example.LessonManagement.model.Lesson;
 import com.example.LessonManagement.repository.HoldLessonDateRepository;
 import com.example.LessonManagement.repository.HoldLessonRepository;
 import com.example.LessonManagement.repository.LessonRepository;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -82,45 +82,47 @@ public class LessonController {
 	}
 
 	@PostMapping("/admin/hold-lesson/add/{id}")
-	public String postAddHoldLesson(@PathVariable Long id, @RequestParam("hold-lesson-dates") String[] holdDates,
+	public String postAddHoldLesson(@PathVariable Long id, @RequestParam("hold-lesson-dates") String[] holdDates, @RequestParam("hold-lesson-dates") String oneHoldDate,
 			@RequestParam("hold-times") String holdTimes) {
 
+		if(oneHoldDate.equals("")) {
+			return "redirect:/admin/hold-lesson/add/"+id + "/?error";
+		}
 		List<HoldLessonDate> holdDateList = new ArrayList<>();
 
 		Long holdTimesInt;
 
 		try {
 			  holdTimesInt = Long.parseLong(holdTimes);
-
 			}catch(Exception e) {
-				return "redirect:/lesson/hold-lesson-form";
+				return "redirect:/admin/hold-lesson/add/"+id + "/?error";
 			}
 
+		Lesson lesson = lessonRepository.findById(id).get();
 		try {
 
 			for(String holdDate : holdDates) {
+				System.out.println("aa"+holdDate);
+				if(oneHoldDate.equals("")) {
+					return "redirect:/admin/hold-lesson/add/"+id + "/?error";
+				}
 				LocalDate localHoldDate = LocalDate.parse(holdDate, DateTimeFormatter.BASIC_ISO_DATE);
-
-				HoldLessonDate holdLessonDate = new HoldLessonDate(id, holdTimesInt);
-				holdLessonDate.setHoldDate(localHoldDate);
+				HoldLessonDate holdLessonDate = new HoldLessonDate(new HoldLesson(lesson, holdTimesInt), localHoldDate);
 				holdDateList.add(holdLessonDate);
 			}
 
 		}catch(Exception e) {
-			return "redirect:/admin/hold-lesson/add/"+id;
+			return "redirect:/admin/hold-lesson/add/"+id + "/?error";
 		}
-
-		Lesson lesson = lessonRepository.findById(id).get();
-
-
-
-
-
 		HoldLesson holdLesson = new HoldLesson(lesson, holdTimesInt, holdDateList);
-
 		holdLessonRepository.save(holdLesson);
-
 		return "redirect:/?hold_lesson_register";
+	}
+
+	@GetMapping("/admin/lesson/hold-lesson-index")
+	public String holdLessonIndexAfterToday(Model model) {
+		model.addAttribute("holdLessons", holdLessonRepository.findHoldLessonsAfterToday(LocalDate.now()));
+		return "lesson/hold-lesson-index";
 	}
 
 }
