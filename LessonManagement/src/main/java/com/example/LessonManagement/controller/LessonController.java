@@ -119,10 +119,5 @@ public class LessonController {
 		return "redirect:/?hold_lesson_register";
 	}
 
-	@GetMapping("/admin/lesson/hold-lesson-index")
-	public String holdLessonIndexAfterToday(Model model) {
-		model.addAttribute("holdLessons", holdLessonRepository.findHoldLessonsAfterToday(LocalDate.now()));
-		return "lesson/hold-lesson-index";
-	}
 
 }

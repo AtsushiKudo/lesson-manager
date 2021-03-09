@@ -26,7 +26,8 @@
 
 			<!-- Nav Item -->
 			<li class="nav-item active"><a class="nav-link pt-2"
-				th:href="@{/admin/lesson/hold-lesson-index}"> <i class="fas fa-user"></i> <span>受講登録</span>
+				th:href="@{/attendance/hold-lesson-index}"> <i class="fas fa-user"></i>
+					<span>受講登録</span>
 			</a></li>
 
 			<li class="nav-item active"><a class="nav-link pt-2"
@@ -52,7 +53,8 @@
 
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
-					th:href="@{/admin/lesson/index}"> <i class="fas fa-table"></i> <span>講座管理</span>
+					th:href="@{/admin/lesson/index}"> <i class="fas fa-table"></i>
+						<span>講座管理</span>
 				</a></li>
 			</th:block>
 
