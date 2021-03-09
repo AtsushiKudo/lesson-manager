@@ -60,6 +60,10 @@ public class HoldLesson {
     @Fetch(FetchMode.SUBSELECT)
     private List<HoldLessonDate> holdLessonDates;
 
+    @OneToMany(mappedBy = "holdLesson", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Attendance> attendances;
+
     public HoldLesson(@NonNull final Lesson lesson,
     		@NonNull final Long holdTimes) {
     	this.pk = new PK(lesson.getId(), holdTimes);

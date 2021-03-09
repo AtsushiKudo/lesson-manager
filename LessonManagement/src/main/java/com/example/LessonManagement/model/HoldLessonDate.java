@@ -26,18 +26,6 @@ public class HoldLessonDate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-
-//	public HoldLessonDate(Long lessonId, Long holdTimes){
-//		this.lessonId = lessonId;
-//		this.holdTimes = holdTimes;
-//	}
-
-//	@Column(name="lesson_id")
-//	Long lessonId;
-//
-//	@Column(name="hold_times")
-//	Long holdTimes;
-
 	@ManyToOne
 	 @JoinColumns ({
 			@JoinColumn(name="lesson_id", referencedColumnName="lesson_id"),

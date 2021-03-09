@@ -41,7 +41,7 @@
 											<td th:text="*{pk.lessonId}"></td>
 											<td th:text="*{pk.holdTimes}"></td>
 											<td><a
-												th:href="@{/attendance/hold-lesson/{lesson-id}/{hold-times}(lesson-id=*{pk.lessonId}, holdTimes=*{holdTimes})"
+												th:href="@{/attendance/hold-lesson/{lesson-id}/{hold-times}(lesson-id=*{pk.lessonId}, hold-times=*{pk.holdTimes})}"
 												class="btn btn-primary btn-icon-split"> <span
 													class="icon text-white-50"> <i class="fas fa-trash"></i>
 												</span> <span class="text">開催講座詳細</span>

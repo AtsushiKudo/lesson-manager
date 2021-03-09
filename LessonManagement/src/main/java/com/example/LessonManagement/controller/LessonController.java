@@ -116,7 +116,7 @@ public class LessonController {
 		}
 		HoldLesson holdLesson = new HoldLesson(lesson, holdTimesInt, holdDateList);
 		holdLessonRepository.save(holdLesson);
-		return "redirect:/?hold_lesson_register";
+		return "redirect:/?lesson_register";
 	}
 
 
