@@ -29,8 +29,9 @@
 									th:if="${holdLessons.size() > 0}">
 									<thead>
 										<tr>
-											<th>#</th>
-											<th>名前</th>
+											<th>講座名</th>
+											<th>開催回</th>
+											<th>開催日</th>
 
 											<th></th>
 										</tr>
@@ -38,16 +39,27 @@
 									<tbody>
 										<tr th:each="holdLesson : ${holdLessons}"
 											th:object="${holdLesson}">
-											<td th:text="*{pk.lessonId}"></td>
+											<td th:text="*{lesson.name}"></td>
 											<td th:text="*{pk.holdTimes}"></td>
+											<td>
+											<div>
+											<ul th:each="holdLessonDate : *{holdLessonDates}">
+											<li th:text="${holdLessonDate.holdDate}"></li>
+											</ul>
+
+											</div>
+											</td>
+
+
 											<td><a
 												th:href="@{/attendance/hold-lesson/{lesson-id}/{hold-times}(lesson-id=*{pk.lessonId}, hold-times=*{pk.holdTimes})}"
 												class="btn btn-primary btn-icon-split"> <span
-													class="icon text-white-50"> <i class="fas fa-trash"></i>
+													class="icon text-white-50"> <i class="fas fa-edit"></i>
 												</span> <span class="text">開催講座詳細</span>
 											</a></td>
 
 										</tr>
+
 									</tbody>
 								</table>
 

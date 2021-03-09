@@ -30,18 +30,19 @@
 					<span>受講登録</span>
 			</a></li>
 
+<!--
 			<li class="nav-item active"><a class="nav-link pt-2"
 				th:href="@{/nyuka}"> <i class="fas fa-user"></i> <span>受講予定一覧</span>
 			</a></li>
-
+-->
 			<li class="nav-item active"><a class="nav-link pt-2"
-				th:href="@{/nyuka}"> <i class="fas fa-user"></i> <span>受講履歴表示</span>
+				th:href="@{/attendance/history}"> <i class="fas fa-user"></i> <span>受講履歴表示</span>
 			</a></li>
 
 
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
-					th:href="@{/register}"> <i class="fas fa-table"></i> <span>従業員管理</span>
+					th:href="@{/register}"> <i class="fas fa-table"></i> <span>従業員登録</span>
 				</a></li>
 			</th:block>
 
@@ -58,11 +59,13 @@
 				</a></li>
 			</th:block>
 
+<!--
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
 					th:href="@{/admin/list}"> <i class="fas fa-table"></i> <span>受講履歴管理</span>
 				</a></li>
 			</th:block>
+			-->
 
 
 			<!-- Divider -->

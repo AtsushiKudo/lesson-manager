@@ -55,11 +55,11 @@ public class LessonController {
 		return "lesson/lesson-index";
 	}
 
-	@GetMapping("/admin/lesson/edit/{id}")
-	public String editLesson(@PathVariable Long id, Model model) {
-		model.addAttribute("lesson", lessonRepository.findById(id));
-		return "/lesson/lesson-form";
-	}
+//	@GetMapping("/admin/lesson/edit/{id}")
+//	public String editLesson(@ModelAttribute  Lesson lesson, @PathVariable Long id, Model model) {
+//		model.addAttribute("lesson", lessonRepository.findById(id));
+//		return "/lesson/lesson-form";
+//	}
 
 	@GetMapping("/admin/lesson/delete/{id}")
 	public String deleteLesson(@PathVariable Long id) {

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<th:block th:insert="fragments/sidebar :: sidebar"></th:block>
+
+		<!-- Main -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<div class="container-fluid">
+
+
+					<!-- DataTables -->
+					<div class="card shadow my-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">受講履歴(受講予定も含む)一覧</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+
+								<div th:if="${attendances.size() == 0}">該当データがありません</div>
+
+								<table class="table table-bordered"
+									th:if="${attendances.size() > 0}">
+									<thead>
+										<tr>
+											<th>講座名</th>
+											<th>開催回</th>
+											<th>開催日</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="attendance : ${attendances}"
+											th:object="${attendance}">
+											<td th:text="*{holdLesson.lesson.name}"></td>
+											<td th:text="*{holdLesson.pk.holdTimes}"></td>
+											<td>
+											<div>
+											<ul th:each="holdLessonDate : *{holdLesson.holdLessonDates}">
+											<li th:text="${holdLessonDate.holdDate}"></li>
+											</ul>
+
+											</div>
+											</td>
+
+										</tr>
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End of Main -->
+	</div>
+
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>
