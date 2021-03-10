@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<th:block th:insert="fragments/sidebar :: sidebar"></th:block>
+
+		<!-- Main -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<div class="container-fluid">
+
+
+
+					<!-- DataTables -->
+					<div class="card shadow my-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">講座詳細</h6>
+						</div>
+
+						<div class="alert alert-danger" th:if="${param.error}">
+						<small>すでに参加申し込みは完了しています。</small>
+					</div>
+						<div class="card-body">
+							<div class="table-responsive">
+
+
+
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>講座名</th>
+											<th>開催回</th>
+
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:object="${holdLesson}">
+											<td th:text="*{lesson.name}"></td>
+											<td th:text="*{pk.holdTimes}"></td>
+											<!--
+											<td><a
+												th:href="@{/attendance/hold-lesson/{lesson-id}/{hold-times}(lesson-id=*{pk.lessonId}, hold-times=*{pk.holdTimes})}"
+												class="btn btn-primary btn-icon-split"> <span
+													class="icon text-white-50"> <i class="fas fa-trash"></i>
+												</span> <span class="text">参加する</span>
+											</a></td>
+											-->
+											<!--
+											<td>
+											<form th:action="@{/attendance/hold-lesson/{lesson-id}/{hold-times}(lesson-id=*{pk.lessonId}, hold-times=*{pk.holdTimes})}"
+												method="post">
+
+												<button class="btn btn-primary btn-icon-split">
+													<i class="fas fa-edit"></i> <span class="text">参加する</span>
+												</button>
+											</form>
+											</td>
+											-->
+										</tr>
+									</tbody>
+								</table>
+
+								<table class="table table-bordered">
+								<p>参加者一覧</p>
+									<thead>
+										<tr>
+											<th>社員コード</th>
+											<th>名前</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="attendance : ${holdLesson.attendances}"
+											th:object="${attendance}">
+											<td th:text="*{employee.employeeCode}"></td>
+											<td th:text="*{employee.name}"></td>
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End of Main -->
+	</div>
+
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>

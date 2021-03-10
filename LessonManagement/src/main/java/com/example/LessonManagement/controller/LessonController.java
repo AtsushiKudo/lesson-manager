@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.LessonManagement.model.HoldLesson;
 import com.example.LessonManagement.model.HoldLessonDate;
 import com.example.LessonManagement.model.Lesson;
+import com.example.LessonManagement.model.HoldLesson.PK;
+import com.example.LessonManagement.repository.EmployeeRepository;
 import com.example.LessonManagement.repository.HoldLessonDateRepository;
 import com.example.LessonManagement.repository.HoldLessonRepository;
 import com.example.LessonManagement.repository.LessonRepository;
@@ -32,6 +34,7 @@ public class LessonController {
 	private final LessonRepository lessonRepository;
 	private final HoldLessonRepository holdLessonRepository;
 	private final HoldLessonDateRepository holdLessonDateRepository;
+	private final EmployeeRepository employeeRepository;
 
 	@GetMapping("/admin/lesson/add")
 	public String addLesson(@ModelAttribute  Lesson lesson) {
@@ -119,5 +122,18 @@ public class LessonController {
 		return "redirect:/?lesson_register";
 	}
 
+	@GetMapping("/admin/attendance/hold-lesson-index")
+	public String holdLessonIndexAfterToday(Model model) {
+		model.addAttribute("holdLessons", holdLessonRepository.findHoldLessonsAfterToday(LocalDate.now()));
+		return "attendance/hold-lesson-index";
+	}
+
+	@GetMapping("/admin/hold-lesson/employee-index/{lesson-id}/{hold-times}")
+	public String showEmployeesByHoldLesson(@PathVariable("lesson-id") Long lessonId, @PathVariable("hold-times") Long holdTimes, Model model) {
+		PK holdLessonId = new PK(lessonId, holdTimes);
+		model.addAttribute("holdLesson", holdLessonRepository.findById(holdLessonId).get());
+		return "lesson/hold-lesson-employee-index";
+	}
 
 }
+

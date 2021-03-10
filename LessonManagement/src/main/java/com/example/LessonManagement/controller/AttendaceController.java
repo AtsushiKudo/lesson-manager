@@ -2,6 +2,8 @@ package com.example.LessonManagement.controller;
 
 import java.time.LocalDate;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class AttendaceController {
 	private final HoldLessonRepository holdLessonRepository;
 	private final AttendanceRepository attendanceRepository;
 	private final LessonRepository lessonRepository;
-	private final EmployeeRepository employeeRepository;
+
 
 	@GetMapping("/attendance/hold-lesson-index")
 	public String holdLessonIndexAfterToday(Model model) {
@@ -59,8 +61,11 @@ public class AttendaceController {
 	}
 
 	@GetMapping("/attendance/history")
-	public String showHistory(Authentication loginUser, Model model) {
-		model.addAttribute("attendances", employeeRepository.findByEmployeeCode(loginUser.getName()).getAttendances());
+	public String showHistory(Authentication loginUser, Model model, Pageable pageable) {
+		Page<Attendance> attendancePage =  attendanceRepository.findByEmployeeCode(loginUser.getName(), pageable);
+		model.addAttribute("page", attendancePage);
+		model.addAttribute("attendances", attendancePage.getContent());
+		model.addAttribute("url", "/attendance/history");
 		return "attendance/attendance-history";
 	}
 

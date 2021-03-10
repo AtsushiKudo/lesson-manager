@@ -38,15 +38,17 @@
 							<div class="table-responsive">
 								<form th:action="@{/admin/hold-lesson/add/{id}(id=*{id})}"
 									th:object="${holdLessonDate}" method="post">
-									> <input type="hidden" th:field="*{id}"> <input
+									<input type="hidden" th:field="*{id}"> <input
 										type="hidden" name="hold-times" th:value="${holdTimes}">
 
-									<p th:text=${holdTimes}></p>
+
 
 									<div class="form-group">
 										<label>講座名</label>
 										<p th:text=${lesson.name}></p>
 									</div>
+									<p>開催回</p>
+									<p th:text=${holdTimes}></p>
 
 									<div class="alert-danger" th:if="${param.error}">
 										<small>正しい形式で入力してください</small>
