@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <th:block th:insert="fragments/base :: header"></th:block>
 </head>
 <body id="page-top">
@@ -20,32 +20,35 @@
 					<div class="alert alert-success" th:if="${param.lesson_delete}">
 						<small>講座マスタの削除が完了しました。</small>
 					</div>
+
 					<!-- List -->
-					<!-- <div class="card shadow my-4">
+					<div class="card shadow my-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">ログイン情報</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 
-								<table id="user-table" class="table table-bordered">
+								<table id="user-table" class="table table-bordered" th:object=${employee}>
 									<thead>
 										<tr>
-											<th>ログインユーザ名</th>
+											<th>ログイン社員コード</th>
+											<th>ログイン社員名</th>
 											<th>ユーザ権限</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td th:text="${employeeName}"></td>
-											<td th:text="${role}"></td>
+											<td th:text="*{employeeCode}"></td>
+											<td th:text="*{Name}"></td>
+											<td th:text="*{role}"></td>
 										</tr>
 									</tbody>
 								</table>
 
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<!-- End of List -->
 
 				</div>

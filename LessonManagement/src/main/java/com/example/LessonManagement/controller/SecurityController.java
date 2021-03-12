@@ -30,8 +30,7 @@ public class SecurityController {
 
     @GetMapping("/")
     public String showList(Authentication loginEmployee, Model model) {
-//        model.addAttribute("employeeName", loginEmployee.getName());
-//        model.addAttribute("role", loginEmployee.getAuthorities());
+        model.addAttribute("employee", employeeRepository.findByEmployeeCode(loginEmployee.getName()));
         return "top";
     }
 
