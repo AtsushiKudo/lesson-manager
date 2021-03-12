@@ -59,7 +59,7 @@
 					</div>
 
 					<!-- 以降がページネーション部分 -->
-					<div>
+					<div th:if="${attendances.size() > 0}">
 						<ul>
 							<li style="display: inline;"><span th:if="${page.first}">&lt;&lt;前</span>
 								<a th:if="${!page.first}"

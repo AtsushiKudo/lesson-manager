@@ -26,11 +26,11 @@
 
 			<!-- Nav Item -->
 			<li class="nav-item active"><a class="nav-link pt-2"
-				th:href="@{/attendance/hold-lesson-index}"> <i
-					class="fas fa-user"></i> <span>受講登録</span>
+				th:href="@{/attendance/hold-lesson-index}"> <i class="fas fa-user"></i>
+					<span>受講登録</span>
 			</a></li>
 
-			<!--
+<!--
 			<li class="nav-item active"><a class="nav-link pt-2"
 				th:href="@{/nyuka}"> <i class="fas fa-user"></i> <span>受講予定一覧</span>
 			</a></li>
@@ -42,7 +42,7 @@
 
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
-					th:href="@{/register}"> <i class="fas fa-table"></i> <span>従業員登録</span>
+					th:href="@{/admin/register}"> <i class="fas fa-table"></i> <span>従業員登録</span>
 				</a></li>
 			</th:block>
 
@@ -62,10 +62,11 @@
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
 					th:href="@{/admin/attendance/hold-lesson-index}"> <i class="fas fa-table"></i>
-						<span>参加者一覧表示</span>
+						<span>参加者一覧</span>
 				</a></li>
 			</th:block>
-			<!--
+
+<!--
 			<th:block sec:authorize="hasRole('ADMIN')">
 				<li class="nav-item active"><a class="nav-link pt-2"
 					th:href="@{/admin/list}"> <i class="fas fa-table"></i> <span>受講履歴管理</span>

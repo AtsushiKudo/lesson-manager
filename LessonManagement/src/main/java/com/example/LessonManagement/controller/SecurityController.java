@@ -20,47 +20,48 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class SecurityController {
 
-    private final EmployeeRepository employeeRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+	private final EmployeeRepository employeeRepository;
+	private final BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 
-    @GetMapping("/")
-    public String showList(Authentication loginEmployee, Model model) {
-        model.addAttribute("employee", employeeRepository.findByEmployeeCode(loginEmployee.getName()));
-        return "top";
-    }
+	@GetMapping("/")
+	public String showList(Authentication loginEmployee, Model model) {
+		model.addAttribute("employee", employeeRepository.findByEmployeeCode(loginEmployee.getName()));
+		model.addAttribute("role", loginEmployee.getAuthorities());
+		return "top";
+	}
 
-    @GetMapping("/admin/list")
-    public String showAdminList(Model model) {
-        model.addAttribute("employees", employeeRepository.findAll());
-        return "list";
-    }
+	@GetMapping("/admin/list")
+	public String showAdminList(Model model) {
+		model.addAttribute("employees", employeeRepository.findAll());
+		return "list";
+	}
 
-    @GetMapping("/register")
-    public String register(@ModelAttribute("employee") Employee employee) {
-        return "register";
-    }
+	@GetMapping("/admin/register")
+	public String register(@ModelAttribute("employee") Employee employee) {
+		return "register";
+	}
 
-    @PostMapping("/register")
-    public String process(@Validated @ModelAttribute("employee") Employee employee,
-            BindingResult result) {
+	@PostMapping("/admin/register")
+	public String process(@Validated @ModelAttribute("employee") Employee employee,
+			BindingResult result) {
 
-        if (result.hasErrors()) {
-            return "register";
-        }
+		if (result.hasErrors()) {
+			return "register";
+		}
 
-        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-        if (employee.isAdmin()) {
-            employee.setRole(Role.ADMIN.name());
-        } else {
-            employee.setRole(Role.USER.name());
-        }
-        employeeRepository.save(employee);
+		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+		if (employee.isAdmin()) {
+			employee.setRole(Role.ADMIN.name());
+		} else {
+			employee.setRole(Role.USER.name());
+		}
+		employeeRepository.save(employee);
 
-        return "redirect:/login?register";
-    }
+		return "redirect:/?lesson_register";
+	}
 }
